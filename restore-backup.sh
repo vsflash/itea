@@ -9,6 +9,12 @@ then
    exit 1
 fi
 
+if [[ ! $1 =~ ^[0-3][0-9]-[0-1][0-9]-[0-9]{4}$ ]];
+then
+  echo "Date must be in format <d-m-y>"
+  exit 1
+fi
+
 BACKUPS_ROOT=backups/$1
 if [[ ! -d $BACKUPS_ROOT ]];
 then
