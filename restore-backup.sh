@@ -21,26 +21,26 @@ then
    echo "Directory $BACKUPS_ROOT doesn't exist!"
    exit 1
 fi
-
-#---------------------RESTORE_DUMP----------------------------------------------------
+#---------------------CHECK_FILES_IN_DIRECTORY----------------------------------------
 if [[ ! -f "$BACKUPS_ROOT"/dump.sql.gz ]];
 then
    echo "File dump.sql.gz doesn't exist in $BACKUPS_ROOT directory!"
    exit 1
 fi
 
-echo "Restore backup..."
-gunzip -dk "$BACKUPS_ROOT"/dump.sql.gz
-mv "$BACKUPS_ROOT"/dump.sql ./
-
-#---------------------RESTORE_BACKED-----------------------------------------------------
-BACKEND_DIRECTORY=backend/web/uploads
 if [[ ! -f "$BACKUPS_ROOT"/uploads.zip ]];
 then
    echo "File uploads.zip doesn't exist in $BACKUPS_ROOT directory!"
    exit 1
 fi
 
+#---------------------RESTORE_DUMP----------------------------------------------------
+echo "Restore backup..."
+gunzip -dk "$BACKUPS_ROOT"/dump.sql.gz
+mv "$BACKUPS_ROOT"/dump.sql ./
+
+#---------------------RESTORE_BACKED--------------------------------------------------
+BACKEND_DIRECTORY=backend/web/uploads
 if [[ ! -d $BACKEND_DIRECTORY ]];
 then
    mkdir -p "$BACKEND_DIRECTORY"
